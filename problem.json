@@ -11,9 +11,17 @@
             "online shops",
             "consumers"
         ],
-        "problem_solution_ids": [],
-        "updated_at": "2025-03-31T18:13:39.082085",
-        "id": 1
+        "problem_solution_ids": [
+            1,
+            2
+        ],
+        "updated_at": "2025-03-31T18:43:43.479839",
+        "id": 1,
+        "market_segments": [
+            "one",
+            "two",
+            "many, many more!"
+        ]
     },
     {
         "description": "Unsere Prozessdaten sind zu schlecht, um AI sinnvoll zu verwenden",
