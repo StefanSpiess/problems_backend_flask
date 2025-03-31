@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Use blockchain for lower costs",
+        "problem_id": 1,
+        "market_demand_id": 1,
+        "solution_space_id": 1,
+        "solution_maturity_id": 1,
+        "updated_at": "2025-03-31T16:43:48.984328",
+        "id": 1
+    },
+    {
+        "name": "I need to unfuck this",
+        "problem_id": 1,
+        "market_demand_id": 5,
+        "solution_space_id": 1,
+        "solution_maturity_id": 1,
+        "updated_at": "2025-03-31T16:44:19.403808",
+        "id": 2
+    },
+    {
+        "name": "Why is there always the same id for a problem",
+        "problem_id": 1,
+        "market_demand_id": 7,
+        "solution_space_id": 1,
+        "solution_maturity_id": 1,
+        "updated_at": "2025-03-31T16:44:45.515999",
+        "id": 3
+    }
+]

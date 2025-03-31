@@ -1,0 +1,84 @@
+[
+    {
+        "total_addressable_market": 2000000000,
+        "serviceable_available_market": 0.0,
+        "serviceable_obtainable_market": 0.0,
+        "growth_rate": 0.09,
+        "competitors": [],
+        "market_segments": {},
+        "id": 1,
+        "updated_at": "2025-03-31 16:28:04.683015"
+    },
+    {
+        "total_addressable_market": 2000000000,
+        "serviceable_available_market": 0.0,
+        "serviceable_obtainable_market": 0.0,
+        "growth_rate": 0.09,
+        "competitors": [],
+        "market_segments": {},
+        "id": 2,
+        "updated_at": "2025-03-31 16:28:12.891658"
+    },
+    {
+        "total_addressable_market": 2000000000,
+        "serviceable_available_market": 0.0,
+        "serviceable_obtainable_market": 0.0,
+        "growth_rate": 0.09,
+        "competitors": [],
+        "market_segments": {},
+        "id": 3,
+        "updated_at": "2025-03-31 16:28:13.746008"
+    },
+    {
+        "total_addressable_market": 2000000000,
+        "serviceable_available_market": 0.0,
+        "serviceable_obtainable_market": 0.0,
+        "growth_rate": 0.09,
+        "competitors": [],
+        "market_segments": {},
+        "id": 4,
+        "updated_at": "2025-03-31 16:28:14.594232"
+    },
+    {
+        "total_addressable_market": 2000000000,
+        "serviceable_available_market": 0.0,
+        "serviceable_obtainable_market": 0.0,
+        "growth_rate": 0.09,
+        "competitors": [],
+        "market_segments": {},
+        "updated_at": "2025-03-31T16:31:45.424226",
+        "id": 5
+    },
+    {
+        "total_addressable_market": 10000000,
+        "serviceable_available_market": 5000000,
+        "serviceable_obtainable_market": 2000000,
+        "growth_rate": 0.12,
+        "competitors": [
+            "Company A",
+            "Company B"
+        ],
+        "market_segments": {
+            "Electronics": 0.6,
+            "Healthcare": 0.4
+        },
+        "updated_at": "2025-03-31T17:13:34.107619",
+        "id": 6
+    },
+    {
+        "total_addressable_market": 10000000,
+        "serviceable_available_market": 5000000,
+        "serviceable_obtainable_market": 2000000,
+        "growth_rate": 0.12,
+        "competitors": [
+            "Company A",
+            "Company B"
+        ],
+        "market_segments": {
+            "Electronics": 0.6,
+            "Healthcare": 0.4
+        },
+        "updated_at": "2025-03-31T17:13:45.241492",
+        "id": 7
+    }
+]
