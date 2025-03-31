@@ -3,11 +3,17 @@
         "total_addressable_market": 2000000000,
         "serviceable_available_market": 0.0,
         "serviceable_obtainable_market": 0.0,
-        "growth_rate": 0.09,
-        "competitors": [],
-        "market_segments": {},
+        "growth_rate": 0.666,
+        "competitors": [
+            "Evil Corporation",
+            "Deloitte Bavaria"
+        ],
+        "market_segments": [
+            "one",
+            "two"
+        ],
         "id": 1,
-        "updated_at": "2025-03-31 16:28:04.683015"
+        "updated_at": "2025-03-31T18:22:48.136066"
     },
     {
         "total_addressable_market": 2000000000,

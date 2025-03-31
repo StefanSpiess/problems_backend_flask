@@ -1,0 +1,34 @@
+[
+    {
+        "description": "High fee for micropayments",
+        "context": "E-commerce microtransactions",
+        "impact": "Loss of small transactions market share",
+        "root_causes": [
+            "banking fees",
+            "legacy systems"
+        ],
+        "stakeholders": [
+            "online shops",
+            "consumers"
+        ],
+        "problem_solution_ids": [],
+        "updated_at": "2025-03-31T18:13:39.082085",
+        "id": 1
+    },
+    {
+        "description": "Unsere Prozessdaten sind zu schlecht, um AI sinnvoll zu verwenden",
+        "context": "Getr\u00e4nkeabf\u00fcllung",
+        "impact": "Wir k\u00f6nnen unsere Daten nicht dazu verwenden, AI-gest\u00fctzt bessere Entscheidungen zu treffen",
+        "root_causes": [
+            "Schlechte Messungen",
+            "Inkonsistenzen"
+        ],
+        "stakeholders": [
+            "Konzerne",
+            "KMU"
+        ],
+        "problem_solution_ids": [],
+        "updated_at": "2025-03-31T18:16:12.699984",
+        "id": 2
+    }
+]

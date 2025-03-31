@@ -1,55 +1,68 @@
+import os
+import importlib
+import inspect
 from flask import Flask, jsonify, request, abort
-
-from problem_solution import ProblemSolution
-from market_demand import MarketDemand
+from classes.base_object import BaseObject
 
 app = Flask(__name__)
 
-# ProblemSolution endpoints (already defined)
-@app.route('/problem_solutions', methods=['GET'])
-def list_solutions():
-    all_problem_solutions = ProblemSolution.load_all()
-    all_solutions = []
-    for data in all_problem_solutions:
-        ps = ProblemSolution.from_dict(data)
-        serialized = ps.to_full_dict()
-        all_solutions.append(serialized)
-    return jsonify(all_solutions)
+def load_classes_from_directory(directory):
+    classes = {}
+    for filename in os.listdir(directory):
+        if filename.endswith('.py') and not filename.startswith('__'):
+            module_name = filename[:-3]  # strip '.py'
+            module_path = f"{directory}.{module_name}"
+            module = importlib.import_module(module_path)
+            # inspect each module member
+            for name, obj in inspect.getmembers(module, inspect.isclass):
+                # we only want classes inheriting from BaseObject in our class modules
+                if issubclass(obj, BaseObject) and obj is not BaseObject:
+                    classes[name] = obj
+    return classes
 
-@app.route('/problem_solutions', methods=['POST'])
-def create_solution():
-    data = request.json
-    required_fields = ['name', 'problem_id', 'market_demand_id', 'solution_space_id', 'solution_maturity_id']
-    if not all(field in data for field in required_fields):
-        abort(400, description="Missing required fields")
-    solution = ProblemSolution(**data)
-    solution.save()
-    return jsonify(solution.to_dict()), 201
+def register_routes_for_class(cls):
+    endpoint = cls.__name__.lower() + 's'
 
-@app.route('/problem_solutions/<int:solution_id>', methods=['GET'])
-def solution_details(solution_id):
-    sol = ProblemSolution.find_by_id(solution_id)
-    if not sol:
-        abort(404)
-    return jsonify(sol.to_full_dict())
+    @app.route(f'/{endpoint}', methods=['GET'], endpoint=f'get_all_{endpoint}')
+    def list_objects(cls=cls):
+        objs = cls.load_all()
+        return jsonify(objs)
 
-# 👉 New endpoints for MarketDemand objects!
+    @app.route(f'/{endpoint}/<int:obj_id>', methods=['GET'], endpoint=f'get_{endpoint[:-1]}')
+    def get_object(obj_id, cls=cls):
+        obj = cls.find_by_id(obj_id)
+        if not obj:
+            abort(404, description=f"{cls.__name__} not found")
+        return jsonify(obj.to_dict())
 
-@app.route('/market_demands', methods=['GET'])
-def get_market_demands():
-    market_demands = MarketDemand.load_all()
-    return jsonify(market_demands)
+    @app.route(f'/{endpoint}', methods=['POST'], endpoint=f'create_{endpoint[:-1]}')
+    def create_object(cls=cls):
+        data = request.json
+        obj = cls(**data)
+        obj.save()
+        return jsonify(obj.to_dict()), 201
 
-@app.route('/market_demands', methods=['POST'])
-def create_market_demand():
-    data = request.json
-    demand = MarketDemand(**data)
-    demand.save()
-    return jsonify(demand.to_dict()), 201
+    # 👉 New explicit update route via HTTP PUT
+    @app.route(f'/{endpoint}/<int:obj_id>', methods=['PUT'], endpoint=f'update_{endpoint[:-1]}')
+    def update_object(obj_id, cls=cls):
+        obj = cls.find_by_id(obj_id)
+        if not obj:
+            abort(404, description=f"{cls.__name__} with id {obj_id} not found")
 
-@app.route('/market_demands/<int:demand_id>', methods=['GET'])
-def get_market_demand(demand_id):
-    demand = MarketDemand.find_by_id(demand_id)
-    if not demand:
-        abort(404, description="MarketDemand not found")
-    return jsonify(demand.to_dict())
+        data = request.json
+        # Update existing attributes explicitly:
+        for key, value in data.items():
+            obj.set_attribute(key, value)
+        # Save updated object
+        obj.save()
+        return jsonify(obj.to_dict()), 200
+
+# IMPORTANT: Ensure the directory is recognized as module (add empty __init__.py file)
+classes = load_classes_from_directory('classes')
+
+# clearly iterate over dynamically loaded classes to register flask routes
+for cls in classes.values():
+    register_routes_for_class(cls)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)

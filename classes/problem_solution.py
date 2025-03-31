@@ -1,18 +1,29 @@
-from base_object import BaseObject
-from problem import Problem
-from market_demand import MarketDemand
-from solution_space import SolutionSpace
-from solution_maturity import SolutionMaturity
+from classes.base_object import BaseObject
+from classes.problem import Problem
+from classes.market_demand import MarketDemand
+from classes.solution_space import SolutionSpace
+from classes.solution_maturity import SolutionMaturity
+from typing import Optional, Dict, Any
 
 class ProblemSolution(BaseObject):
-    storage_file = 'problem_solution.json'
+    storage_file: str = 'problem_solution.json'
 
-    def __init__(self, name: str,
+    # Explicit attribute annotations for clarity and static analysis
+    id: Optional[int]
+    name: str
+    problem_id: int
+    market_demand_id: int
+    solution_space_id: int
+    solution_maturity_id: int
+    updated_at: Optional[str]  # ISO-formatted datetime string
+
+    def __init__(self, 
+                 name: str,
                  problem_id: int,
                  market_demand_id: int,
                  solution_space_id: int,
                  solution_maturity_id: int,
-                 id=None):
+                 id: Optional[int] = None):
 
         super().__init__(
             id=id,
@@ -23,11 +34,11 @@ class ProblemSolution(BaseObject):
             solution_maturity_id=solution_maturity_id
         )
 
-    def load_sub_object(self, cls, obj_id):
-            obj = cls.find_by_id(obj_id)
-            return obj.to_dict() if obj else None
+    def load_sub_object(self, cls, obj_id) -> Optional[Dict[str, Any]]:
+        obj = cls.find_by_id(obj_id)
+        return obj.to_dict() if obj else None
 
-    def to_full_dict(self):
+    def to_full_dict(self) -> Dict[str, Any]:
         return {
             'id': self.get_attribute('id'),
             'name': self.get_attribute('name'),
