@@ -1,3 +1,4 @@
+annotated-types==0.7.0
 astroid==3.3.9
 blinker==1.9.0
 click==8.1.8
@@ -14,10 +15,12 @@ mccabe==0.7.0
 packaging==24.2
 platformdirs==4.3.7
 pluggy==1.5.0
+pydantic_core==2.33.0
 pylint==3.3.6
 pytest==8.3.5
 pytest-cov==6.0.0
 tomli==2.2.1
 tomlkit==0.13.2
+typing-inspection==0.4.0
 typing_extensions==4.13.0
 Werkzeug==3.1.3
