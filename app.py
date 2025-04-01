@@ -30,10 +30,11 @@ import inspect
 import os
 
 from flask import Flask, abort, jsonify, request
-
+from flask_cors import CORS
 from classes.base_object import BaseObject
 
 app = Flask(__name__)
+CORS(app)
 
 def load_classes_from_directory(directory):
     """
