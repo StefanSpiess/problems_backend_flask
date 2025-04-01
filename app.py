@@ -25,10 +25,12 @@ Usage:
     python app.py
 """
 
-import os
 import importlib
 import inspect
-from flask import Flask, jsonify, request, abort
+import os
+
+from flask import Flask, abort, jsonify, request
+
 from classes.base_object import BaseObject
 
 app = Flask(__name__)

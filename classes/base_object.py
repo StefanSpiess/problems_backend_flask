@@ -53,6 +53,16 @@ class BaseObject:
 
     @classmethod
     def load_all(cls):
+        """
+        Load all stored instances of the current class from its corresponding JSON file.
+
+        Returns:
+            list[dict]: List of dictionaries, each representing a stored instance.
+                        Returns an empty list if no stored objects exist.
+
+        Raises:
+            ValueError: If 'storage_file' has not been defined in the subclass.
+        """
         if cls.storage_file is None:
             raise ValueError("Subclass must define storage_file.")
         if not os.path.exists(cls.storage_file):
@@ -62,17 +72,47 @@ class BaseObject:
 
     @classmethod
     def find_by_id(cls, obj_id):
+        """
+        Find and return an object by its unique identifier.
+
+        Args:
+            obj_id (int): The unique identifier of the object to retrieve.
+
+        Returns:
+            BaseObject | None: An instance of the class (derived from BaseObject) matching the provided ID,
+                            or None if no such object exists.
+        """
         data = next((obj for obj in cls.load_all() if obj.get('id') == obj_id), None)
         return cls.from_dict(data) if data else None
 
     @classmethod
     def _next_id(cls, objects):
+        """
+        Determine the next available unique numeric identifier based on existing objects.
+
+        Args:
+            objects (list[dict]): List of existing stored objects used to calculate the next ID.
+
+        Returns:
+            int: The next free ID (current maximum ID + 1).
+                Returns 1 if no existing IDs are found.
+        """
         existing_ids = [obj.get('id', 0) for obj in objects if isinstance(obj.get('id'), int)]
         return max(existing_ids or [0]) + 1
 
     @classmethod
     def from_dict(cls, dict_data):
-        # Instantiate without calling __init__; directly set _attributes.
+        """
+        Instantiate an object of the class based directly on provided dictionary data,
+        bypassing the standard __init__ constructor.
+
+        Args:
+            dict_data (dict): Dictionary containing all attributes of the object.
+
+        Returns:
+            BaseObject | None: A fully initialized class instance with attributes directly set,
+                            or None if dict_data is None.
+        """
         if dict_data is None:
             return None
         obj = cls.__new__(cls)
