@@ -1,0 +1,26 @@
+[
+    {
+        "username": "sspiess",
+        "email": "stefan.spiess@ventum.de",
+        "full_name": "Stefan Spiess",
+        "is_active": true,
+        "updated_at": "2025-04-01T11:47:18.948581",
+        "id": 1
+    },
+    {
+        "username": "sspiess",
+        "email": "stefan.spiess@ventum.de",
+        "full_name": "Stefan Spiess",
+        "is_active": true,
+        "updated_at": "2025-04-01T11:47:22.203217",
+        "id": 2
+    },
+    {
+        "username": "hschlaemmer",
+        "email": "horst.schlaemmer@ventum.de",
+        "full_name": "Horest Schl\u00e4mmer",
+        "is_active": true,
+        "updated_at": "2025-04-01T11:47:27.245626",
+        "id": 3
+    }
+]
