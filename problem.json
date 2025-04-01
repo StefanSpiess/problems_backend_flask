@@ -38,5 +38,21 @@
         "problem_solution_ids": [],
         "updated_at": "2025-03-31T18:16:12.699984",
         "id": 2
+    },
+    {
+        "description": "Ich hasse diese Welt",
+        "context": "Psychohygiene",
+        "impact": "Ich tue jeden Tag viel f\u00fcr den Weltfrieden aber irgendein Despot oder Dilettant finde sich immer, der das wieder konterkariert",
+        "root_causes": [
+            "Idiocracy",
+            "Donald Trump"
+        ],
+        "stakeholders": [
+            "Tiere",
+            "Der Kosmos"
+        ],
+        "problem_solution_ids": [],
+        "updated_at": "2025-04-01T10:34:45.482920",
+        "id": 3
     }
 ]

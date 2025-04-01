@@ -98,10 +98,23 @@ def register_routes_for_class(cls):
 
     @app.route(f'/{endpoint}', methods=['POST'], endpoint=f'create_{endpoint[:-1]}')
     def create_object(cls=cls):
-        """Create a new object with provided JSON payload. Return the created object as JSON."""
         data = request.json
-        obj = cls(**data)
-        obj.save()
+
+        # Prüfe auf unbekannte Felder:
+        allowed_fields = set(inspect.signature(cls.__init__).parameters.keys())
+        allowed_fields.discard('self')
+        allowed_fields.discard('id')  # id darf optional vom Client weggelassen werden
+
+        unknown_fields = set(data.keys()) - allowed_fields
+        if unknown_fields:
+            abort(400, description=f"Unbekannte Attribute erhalten: {', '.join(unknown_fields)}")
+
+        try:
+            obj = cls(**data)
+            obj.save()
+        except TypeError as e:
+            abort(400, description=str(e))
+
         return jsonify(obj.to_dict()), 201
 
     @app.route(f'/{endpoint}/<int:obj_id>', methods=['PUT'], endpoint=f'update_{endpoint[:-1]}')

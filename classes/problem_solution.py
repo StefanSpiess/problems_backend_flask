@@ -1,21 +1,25 @@
+from typing import Any, Dict, Optional
+
 from classes.base_object import BaseObject
-from classes.problem import Problem
 from classes.market_demand import MarketDemand
-from classes.solution_space import SolutionSpace
+from classes.problem import Problem
 from classes.solution_maturity import SolutionMaturity
-from typing import Optional, Dict, Any
+from classes.solution_space import SolutionSpace
+
 
 class ProblemSolution(BaseObject):
     storage_file: str = 'problem_solution.json'
+    STATUS_VALUES = ["Idea", "In Development", "Testing", "Finished"]
+    ...
 
-    # Explicit attribute annotations for clarity and static analysis
     id: Optional[int]
     name: str
     problem_id: int
     market_demand_id: int
     solution_space_id: int
     solution_maturity_id: int
-    updated_at: Optional[str]  # ISO-formatted datetime string
+    user_id: Optional[int]  # <-- NEU: ID des Verantwortlichen Users
+    status: str  # wir erstellen später einen Statusworkflow
 
     def __init__(self, 
                  name: str,
@@ -23,7 +27,12 @@ class ProblemSolution(BaseObject):
                  market_demand_id: int,
                  solution_space_id: int,
                  solution_maturity_id: int,
+                 user_id: Optional[int] = None,
+                 status: str = "Idea",
                  id: Optional[int] = None):
+        
+        if status not in self.STATUS_VALUES:
+            raise ValueError(f"Invalid status '{status}'. Must be one of {self.STATUS_VALUES}")
 
         super().__init__(
             id=id,
@@ -31,7 +40,9 @@ class ProblemSolution(BaseObject):
             problem_id=problem_id,
             market_demand_id=market_demand_id,
             solution_space_id=solution_space_id,
-            solution_maturity_id=solution_maturity_id
+            solution_maturity_id=solution_maturity_id,
+            user_id=user_id,
+            status=status
         )
 
     def load_sub_object(self, cls, obj_id) -> Optional[Dict[str, Any]]:
